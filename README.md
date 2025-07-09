@@ -30,6 +30,17 @@
 - ✅ Soft delete y relaciones entre entidades
 - ✅ Estructura modular para escalabilidad
 
+## 📦 Módulos del Proyecto
+
+| Módulo              | Descripción                                                                 | Relaciones principales                              |
+|---------------------|-----------------------------------------------------------------------------|------------------------------------------------------|
+| 👤 **Cliente**       | Gestiona la información personal y de contacto de los clientes.            | 🔗 Uno-a-muchos con `Expediente`                     |
+| 📁 **Expediente**    | Administra los casos legales asociados a un cliente.                       | 🔗 Muchos-a-uno con `Cliente`<br>🔗 Muchos-a-uno con `TipoExpediente`<br>🔗 Uno-a-muchos con `Archivo` |
+| 📄 **Archivo**       | Gestiona los documentos digitales de cada expediente.                      | 🔗 Muchos-a-uno con `Expediente`                     |
+| 🗂️ **TipoExpediente**| Define las categorías legales de los expedientes.                          | 🔗 Uno-a-muchos con `Expediente`                     |
+
+
+
 ## Swagger API Docs
 
 La documentación de la API generada automáticamente por Swagger está disponible en:
@@ -40,7 +51,10 @@ http://localhost:3000/docs
 
 Este proyecto incluye un script para poblar la tabla de tipos de expediente:
 
-npm run seed:tipo-expediente
+```bash
+$ npm run seed:tipo-expediente
+
+```
 
 "seed:tipo-expediente": "ts-node -r tsconfig-paths/register ./seeds/tipoExpediente.ts"
 
