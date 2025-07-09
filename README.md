@@ -21,6 +21,32 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Features
+
+- ✅ API RESTful construida con [NestJS](https://nestjs.com)
+- ✅ Validación automática con `class-validator`
+- ✅ Documentación interactiva con Swagger
+- ✅ Script de carga de datos de prueba (`seed`)
+- ✅ Soft delete y relaciones entre entidades
+- ✅ Estructura modular para escalabilidad
+
+## Swagger API Docs
+
+La documentación de la API generada automáticamente por Swagger está disponible en:
+
+http://localhost:3000/docs
+
+## Seed Script
+
+Este proyecto incluye un script para poblar la tabla de tipos de expediente:
+
+npm run seed:tipo-expediente
+
+"seed:tipo-expediente": "ts-node -r tsconfig-paths/register ./seeds/tipoExpediente.ts"
+
+Asegúrate de tener conectada tu base de datos antes de ejecutar el comando.
+
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
