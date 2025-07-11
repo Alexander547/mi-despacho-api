@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Matches,
+} from 'class-validator';
 
 export class CreateClienteDto {
   @ApiProperty({ example: 'Juan' })
@@ -32,4 +38,9 @@ export class CreateClienteDto {
   @ApiProperty({ example: 'juan.perez@email.com', required: true })
   @IsEmail()
   correo: string;
+
+  @ApiProperty({ example: 'https://example.com/images/cliente1.jpg' })
+  @IsOptional()
+  @IsString()
+  imgPerfilUrl: string;
 }

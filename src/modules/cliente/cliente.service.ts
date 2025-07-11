@@ -4,6 +4,7 @@ import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cliente } from './entities/cliente.entity';
 import { Repository } from 'typeorm';
+import { PaginadoDto } from 'src/shared/dto/paginadas.dto';
 
 @Injectable()
 export class ClienteService {
@@ -28,9 +29,30 @@ export class ClienteService {
     });
   }
 
+  async paginados(dto: PaginadoDto) {
+    const { page, limit } = dto;
+    const skip = (page - 1) * limit;
+    const [clientes, total] = await this.clienteRepo.findAndCount({
+      order: { createdAt: 'ASC' },
+      skip,
+      take: limit,
+      relations: {
+        expedientes: true,
+      },
+    });
+    const clientesWithCounts = clientes.map((cliente) => ({
+      ...cliente,
+      expedientesCount: cliente.expedientes?.length || 0,
+      expedientes: undefined, //
+    }));
+
+    return { clientes: clientesWithCounts, total };
+  }
+
   async findOne(id: string): Promise<Cliente> {
     const cliente = await this.clienteRepo.findOne({
       where: { id },
+      relations: { expedientes: { archivos: true } },
     });
 
     if (!cliente) {
@@ -51,5 +73,17 @@ export class ClienteService {
     if (result.affected === 0) {
       throw new NotFoundException(`Cliente con id ${id} no encontrado`);
     }
+  }
+
+  // cliente.service.ts
+
+  async findByIdentificacion(identificacion: string): Promise<Cliente | null> {
+    return this.clienteRepo.findOne({
+      where: { identificacion },
+    });
+  }
+
+  async findByCorreo(correo: string): Promise<Cliente | null> {
+    return this.clienteRepo.findOne({ where: { correo } });
   }
 }

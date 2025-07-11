@@ -56,7 +56,15 @@ $ npm run seed:tipo-expediente
 
 ```
 
+Este proyecto incluye un script para poblar la tabla de Clientes:
+
+```bash
+$ "seed:clientes": "ts-node -r tsconfig-paths/register ./seeds/clientes.ts",
+
+```
+
 "seed:tipo-expediente": "ts-node -r tsconfig-paths/register ./seeds/tipoExpediente.ts"
+"seed:clientes": "ts-node -r tsconfig-paths/register ./seeds/clientes.ts",
 
 Asegúrate de tener conectada tu base de datos antes de ejecutar el comando.
 

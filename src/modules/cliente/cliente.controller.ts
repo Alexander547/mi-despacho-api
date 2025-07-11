@@ -12,6 +12,7 @@ import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Cliente } from './entities/cliente.entity';
+import { PaginadoDto } from 'src/shared/dto/paginadas.dto';
 
 @ApiTags('Clientes')
 @Controller('cliente')
@@ -23,6 +24,13 @@ export class ClienteController {
   @ApiResponse({ status: 201, description: 'Cliente creado exitosamente.' })
   create(@Body() createClienteDto: CreateClienteDto) {
     return this.clienteService.create(createClienteDto);
+  }
+
+  @Post('paginado')
+  @ApiOperation({ summary: 'Listado de Clientes paginado' })
+  @ApiResponse({ status: 201, description: 'Listar clientes.' })
+  findAndCountAll(@Body() dto: PaginadoDto) {
+    return this.clienteService.paginados(dto);
   }
 
   @Get()

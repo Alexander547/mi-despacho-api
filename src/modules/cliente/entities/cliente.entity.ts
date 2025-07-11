@@ -58,6 +58,14 @@ export class Cliente {
   correo: string;
 
   @ApiProperty({
+    example: 'https://example.com/images/cliente1.jpg',
+    description: 'URL de la imagen de perfil del cliente',
+    required: false,
+  })
+  @Column({ nullable: true })
+  imgPerfilUrl: string;
+
+  @ApiProperty({
     type: () => [Expediente],
     description: 'Lista de expedientes del cliente',
   })
